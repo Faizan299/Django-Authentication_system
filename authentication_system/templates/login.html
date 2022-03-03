@@ -1,0 +1,47 @@
+{% block content %}
+
+
+{% if error %}
+{{ error }}
+
+<br/>
+<br/>
+{% endif %}
+
+<h1>Login!</h1>
+
+<form method = "POST" action=".">
+    {% csrf_token %}
+    username:
+    <br/>
+    <input type="text" name="username" />
+    <br/>
+    <br/>
+
+    Password:
+    <br/>
+    <input type="password" name="password" />
+    <br/>
+    <br/>
+
+    <input class ="btn btn-primary" type="submit" value= "Login" />
+    <br/>
+
+
+
+</form>
+
+<ul style="display:flex;list-style:none;gap:20px;">
+    <li>
+<p><a href="{% url 'register' %}">Signup</a> </p>
+    </li>
+
+    <li>
+<p><a href="{% url 'password-reset' %}">Forgot Password</a> </p>
+    </li>
+</ul>
+
+
+
+
+{% endblock %}

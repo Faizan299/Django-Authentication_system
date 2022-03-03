@@ -1,0 +1,52 @@
+{% block content %}
+
+<h1>Signup!</h1>
+
+<form method = "POST" action=".">
+    {% csrf_token %}
+
+    First Name:
+    <br/>
+    <input type="text" name="username" />
+    <br/>
+    <br/>
+
+    Last Name:
+    <br/>
+    <input type="text" name="lname" />
+    <br/>
+    <br/>
+
+    Email:
+    <br/>
+    <input type="text" name="email" />
+    <br/>
+    <br/>
+
+    Password:
+    <br/>
+    <input type="password" name="password1" />
+    <br/>
+    <br/>
+
+    Confirm Password:
+    <br/>
+    
+    <input type="password" name="password2" />
+    <br/>
+    <br/>
+
+    <input class ="btn btn-primary" type="submit" value= "signup" />
+    <br/>
+    
+</form>
+
+<ul style="display:flex;list-style:none;gap:20px;">
+    <li>
+<p><a href="{% url 'login' %}">Already Registered</a> </p>
+    </li>
+
+</ul>
+
+
+{% endblock %}
