@@ -27,6 +27,6 @@ class Comment(models.Model):
     desc = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
 
-    def get_absolute_url(self):
-        return reverse('forum-list')
+    def __str__(self):
+        return self.desc
 

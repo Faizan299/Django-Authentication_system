@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from .forms import *
 from .models import *
 from django.shortcuts import render, get_object_or_404
-from django.views.generic import CreateView, ListView,DetailView
+from django.views.generic import ListView
 
 def home(request):
     forums=forum.objects.all()
@@ -56,24 +56,16 @@ class ForumListView(ListView):
     model = forum
     queryset = forum.objects.order_by('date_created')
     
-class CommentCreateView(CreateView):
-    model = Comment
-    fields = ['desc']
-    
-    def form_valid(self,form):
-        _forum = get_object_or_404(forum, id=self.kwargs['pk'])
-        form.instance.user = self.request.user
-        form.instance.forum = _forum
-        return super().form_valid(form)
-    
-# class CommentUpdateView(UpdateView):
-#     model = Comment
-#     fields = ['desc']
-#     template_name = 'forum_update_comment.html'
-    
-# class CommentDeleteView(DeleteView):
-#     model = Comment
-#     success_url = '/forum'
+
+def commentadd(request):
+    form = CommentForm()
+    if request.method == "POST":
+        form = CommentForm(request.POST, initial={"forum_id": request.POST.get("forum_id"), "user": request.user})
+        if form.is_valid():
+            form.save()
+            return redirect(reverse("getById", args=[request.POST.get("forum_id")]))
+    context = {'form':form}
+    return render(request, 'forum_detail.html', context)
 
 
     

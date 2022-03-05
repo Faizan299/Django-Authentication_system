@@ -12,5 +12,15 @@ class CreationInDiscussion(ModelForm):
         model = Discussion
         fields = "__all__"
 
-class CommentForm(forms.Form):
-    desc = forms.CharField(widget=forms.Textarea)
+class CommentForm(ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['desc']
+
+    def save(self):
+        _forum = forum.objects.get(id=self.initial["forum_id"])
+        return Comment.objects.create(
+            forum=_forum,
+            user=self.initial["user"],
+            desc=self.cleaned_data["desc"]
+        )
