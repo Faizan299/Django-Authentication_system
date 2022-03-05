@@ -29,7 +29,7 @@ def login(request):
             context ={
                 'data':user
             }
-            return render(request,'home.html',context)
+            return redirect('/home/')
         else:
             return render (request,'login.html', {'error':'Username or password is incorrect!'})
     else:

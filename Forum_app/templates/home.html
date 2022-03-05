@@ -24,7 +24,7 @@
                 <div class="card box container">
                     <br>
                     <h5 class="card-title">
-                        <a href='{{forum.link}}'><h3>{{forum.topic}}</h3></a> 
+                        <a href="{% url 'getById' forum.id%}"><h3>{{forum.topic}}</h3></a> 
                         <div class="card-body container">
                                 <p>{{forum.description}}</p>
                             </h5>
